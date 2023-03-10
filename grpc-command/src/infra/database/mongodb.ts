@@ -1,4 +1,4 @@
-import mongoose, { Connection } from 'mongoose';
+import mongoose from 'mongoose';
 
 
 export class MongooseHelper {
@@ -6,10 +6,7 @@ export class MongooseHelper {
 
   static async getClient(): Promise<any> {
     if (!this.mongooseClient) {
-      this.mongooseClient = await mongoose.connect('mongodb://localhost:27017/grpc-command', {
-       // useNewUrlParser: true,
-       // useUnifiedTopology: true,
-      })
+      this.mongooseClient = await mongoose.connect('mongodb://mongo:27017');
     }
     return this.mongooseClient;
   }

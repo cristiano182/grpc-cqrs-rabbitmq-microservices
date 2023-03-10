@@ -1,0 +1,1 @@
+{"version":3,"file":"bank-transaction-schema.js","sourceRoot":"","sources":["../../../src/infra/schemas/bank-transaction-schema.ts"],"names":[],"mappings":";;;;;AAAA,wDAA+B;AAE/B,MAAM,qBAAqB,GAAG,IAAI,kBAAQ,CAAC,MAAM,CAAC;IAC9C,GAAG,EAAE,MAAM;IACX,IAAI,EAAE,MAAM;IACZ,KAAK,EAAE,MAAM;IACb,IAAI,EAAE,MAAM;CACf,CAAC,CAAC;AAEH,kBAAe,kBAAQ,CAAC,KAAK,CAAC,iBAAiB,EAAE,qBAAqB,CAAC,CAAC"}

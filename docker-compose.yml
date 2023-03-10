@@ -1,14 +1,20 @@
 version: '3.7'
 
+networks:
+  my-networks:
+    driver: bridge
 services:
-  mongodb:
-    container_name: mongodb
-    image: bitnami/mongodb
-    restart: alway
+  mongo:
+    container_name: mongo
+    image: bitnami/mongodb:latest
+    restart: always
     ports:
       - '27017:27017'
+    command: mongod --port 27017
     volumes: 
       - mongodb-cache:/data
+    networks:
+      - my-networks
   redis:
     container_name: redis
     image: redis
@@ -21,9 +27,11 @@ services:
     container_name: grpc-command
     restart: always
     build:
-      context: .
+      context: ./grpc-command
       dockerfile: Dockerfile
       target: grpc-command
+    networks:
+      - my-networks
     environment:
       - PORT=8080
       - REDIS_HOST=redis
@@ -31,14 +39,11 @@ services:
     expose:
       - '50051'
     links:
-      - mongodb
+      - mongo
     ports:
       - '50051:50051'
-    volumes:
-      - ./src:/usr/src/app/src
-      - ./test:/usr/src/app/test
     depends_on:
-      - mongodb
+      - mongo
     command: npm run start
 volumes:
   redis-cache:

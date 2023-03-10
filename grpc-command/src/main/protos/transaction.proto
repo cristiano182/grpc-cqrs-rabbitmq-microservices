@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+message Transaction {
+   string cpf = 1;
+   string date = 2;
+   string value = 3;
+   string type = 4;
+}
+
+message EmptyResponse {
+    string message = 1;
+ }
+
+service BankTransaction  {   
+  rpc Register(Transaction) returns (EmptyResponse) {}
+}
