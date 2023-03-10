@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+  mongodb:
+    container_name: mongodb
+    image: bitnami/mongodb
+    restart: alway
+    ports:
+      - '27017:27017'
+    volumes: 
+      - mongodb-cache:/data
+  redis:
+    container_name: redis
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes: 
+      - redis-cache:/data
+  grpc-command:
+    container_name: grpc-command
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: grpc-command
+    environment:
+      - PORT=8080
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    expose:
+      - '50051'
+    links:
+      - mongodb
+    ports:
+      - '50051:50051'
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./test:/usr/src/app/test
+    depends_on:
+      - mongodb
+    command: npm run start
+volumes:
+  redis-cache:
+    driver: local
+  mongodb-cache:
+    driver: local
