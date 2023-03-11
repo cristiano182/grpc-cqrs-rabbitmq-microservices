@@ -7,9 +7,8 @@ class CreateTransactionUsecase {
         this.createTransactionGateway = createTransactionGateway;
     }
     async register(transaction) {
-        if (transaction.type.match(/^(debit|credit)$/)) {
+        if (!transaction.type.match(/^(debit|credit)$/))
             throw new bank_transaction_error_1.BankTransactionError();
-        }
         return this.createTransactionGateway.register(transaction);
     }
 }

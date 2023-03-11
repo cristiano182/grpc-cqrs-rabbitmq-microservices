@@ -4,6 +4,7 @@ import path from "path"
 import "./config/database"
 import * as protoLoader from '@grpc/proto-loader';
 import { BankTransactionServer } from "../presentation/bank-transaction-grpc"
+import env from "./config/env";
 
 
 const packageDefinition = protoLoader.loadSync(path.resolve(__dirname, "protos/transaction.proto"));
@@ -15,9 +16,9 @@ const server = new Server()
 
 
 server.addService(proto.BankTransaction.service, BankTransactionServer);
-server.bindAsync('0.0.0.0:50051', ServerCredentials.createInsecure(), (err) => {
+server.bindAsync(`${env.HOST}:${env.PORT}`, ServerCredentials.createInsecure(), (err) => {
   if (err) console.log(err);
-  console.log("GRPC listen on port: 50051")
+  console.log(`GRPC-COMMAND listen on port => ${env.PORT} and HOST => ${env.HOST}`)
   server.start();
 });
 

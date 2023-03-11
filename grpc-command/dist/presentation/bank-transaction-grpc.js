@@ -6,6 +6,7 @@ const create_transaction_2 = require("../infra/gateway/mongodb/create-transactio
 exports.BankTransactionServer = {
     async register(call, callback) {
         const transaction = call.request;
+        console.log("grpc-command request", call.request);
         const createTransactionGateway = new create_transaction_2.CreateTransactionGatewayMongoDB();
         const createTransactionUsecase = new create_transaction_1.CreateTransactionUsecase(createTransactionGateway);
         await createTransactionUsecase.register(transaction);

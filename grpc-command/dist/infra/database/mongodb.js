@@ -8,7 +8,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 class MongooseHelper {
     static async getClient() {
         if (!this.mongooseClient) {
-            this.mongooseClient = await mongoose_1.default.connect('mongodb://localhost:27017/grpc-command', {});
+            this.mongooseClient = await mongoose_1.default.connect('mongodb://mongo:27017');
         }
         return this.mongooseClient;
     }

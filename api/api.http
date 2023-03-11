@@ -1,0 +1,40 @@
+POST http://localhost:3000/transaction?temp=2
+Content-type: application/json
+
+{
+    "cpf": "41233439880",
+    "date": "41233439880",
+    "value": "41233439880",
+    "type": "credit"
+}
+
+###
+GET http://localhost:3000/products
+
+###
+GET http://localhost:3000/products/2
+
+###
+PATCH http://localhost:3000/products/2
+Content-type: application/json
+
+{
+    "name": "produto alterado",
+    "price": 10.03
+}
+
+###
+DELETE http://localhost:3000/products/1
+
+# PUT (Completa) vs PATCH (Parcial)
+# 200 OK
+# 201 Created
+
+###
+POST http://localhost:3000/product-grpc-clients
+Content-type: application/json
+
+{
+    "name": "produto teste",
+    "price": 10.02
+}

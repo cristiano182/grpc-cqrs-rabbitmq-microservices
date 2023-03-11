@@ -1,0 +1,1 @@
+{"version":3,"file":"bank-transaciton-error.js","sourceRoot":"","sources":["../../../src/domain/errors/bank-transaciton-error.ts"],"names":[],"mappings":";;;AAEA,MAAa,wBAA0B,SAAQ,KAAK;IACpD;QACI,KAAK,CAAC,2BAA2B,CAAC,CAAA;QAClC,IAAI,CAAC,IAAI,GAAG,0BAA0B,CAAA;IACzC,CAAC;CACD;AALD,4DAKC"}

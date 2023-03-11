@@ -11,6 +11,11 @@ message EmptyResponse {
     string message = 1;
  }
 
+ message listTransactionRequest {
+   string cpf = 1;
+}
+
 service BankTransaction  {   
-  rpc Register(Transaction) returns (EmptyResponse) {}
+  rpc register(Transaction) returns (EmptyResponse) {}
+  rpc list(listTransactionRequest) returns (Transaction) {}
 }
