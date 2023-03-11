@@ -1,4 +1,5 @@
 syntax = "proto3";
+import "google/protobuf/empty.proto";
 
 message Transaction {
    string cpf = 1;
@@ -7,15 +8,11 @@ message Transaction {
    string type = 4;
 }
 
-message EmptyResponse {
-    string message = 1;
- }
-
  message listTransactionRequest {
    string cpf = 1;
 }
 
 service BankTransaction  {   
-  rpc register(Transaction) returns (EmptyResponse) {}
+  rpc register(Transaction) returns (google.protobuf.Empty) {}
   rpc list(listTransactionRequest) returns (Transaction) {}
 }

@@ -12,7 +12,7 @@ export class RegisterBankTransactionGatewayGRPC implements IBankTransactionGatew
    }
     
    async register (transaction: BankTransactionDTO): Promise<void>{
-      const response = await GRPCHelper.getClient().register(transaction)
-      return response
+         await GRPCHelper.getClient().register(transaction)
+      return;
    }
 }

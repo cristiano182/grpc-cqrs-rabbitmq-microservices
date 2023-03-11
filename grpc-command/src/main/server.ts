@@ -1,7 +1,8 @@
+import "reflect-metadata"
 import {Server, ServerCredentials, loadPackageDefinition} from "@grpc/grpc-js"
 import path from "path"
 
-import "./config/database"
+//import "./config/database"
 import * as protoLoader from '@grpc/proto-loader';
 import { BankTransactionServer } from "../presentation/bank-transaction-grpc"
 import env from "./config/env";
