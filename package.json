@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "amqplib": "^0.10.3",
-    "ioredis": "^5.3.1"
-  }
-}
