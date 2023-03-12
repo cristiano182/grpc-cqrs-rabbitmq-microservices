@@ -12,7 +12,7 @@ const protoConfig = {
     oneofs: true,
   };
 
-export default class GRPCHelper  {
+export default class GRPCQueryHelper  {
     static grpcClient: any;
 
     static getClient() {
@@ -21,7 +21,7 @@ export default class GRPCHelper  {
             protoConfig
           );
           const proto: any = grpc.loadPackageDefinition(protoDef);
-          this.grpcClient = new proto.BankTransaction(`${env.GRPC_COMMAND_HOST}:${env.GRPC_COMMAND_PORT}`, grpc.credentials.createInsecure());
+          this.grpcClient = new proto.BankTransaction(`${env.GRPC_QUERY_HOST}:${env.GRPC_QUERY_PORT}`, grpc.credentials.createInsecure());
           Object.entries(this.grpcClient.__proto__).map(([prop, value]: any) => {
             if (value.originalName !== undefined) {
               this.grpcClient[prop] = promisify(value);

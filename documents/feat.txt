@@ -1,0 +1,43 @@
+grpc-command: registra transaction
+grpc-query: lista transactions
+grpc-oauth: processo de oauth2
+rabbitmq: event-sourcing
+api-cqrs: orquesta grpc
+
+
+
+usuario registra uma transaction
+grpc-command registra no mongodb
+rabbitmq recebe o evento/message
+grpc-query sincroniza com redis
+
+O CQRS deve ser focada na intensao do usuario, o aplicativo nao deve perder a intensao do usuario
+
+ CQRS depende do event-sourcing
+
+Dados registrados no sql, depois e gerar uma view e salvo no redis
+
+Como monitorar transacoes, errors e microservices-health
+Como manter a ordem que as transacoes chegam
+
+Monitoramento, ELK ou Prometheus+Grafana
+
+
+O banco de dados de leitura redis, armazenara uma view do extrato do usuario.A chave sera o cpf.
+
+ uma das vantagens do CQRS é que nosso banco de dados de consultas pode ser adaptado para atender às necessidades da visualização.
+ ou seja, nosso banco de dados funciona exatamente como nosso modelo de domínio.
+
+
+ melhoria, account -> transactions
+
+ topic -> account -> routing key -> debit or credit
+
+ podemos ter microservices para diferentes tipo de query, exemplo: um microservice que escuta o rabbit e devolve extrato, ou microservice que atende 
+ extrato detalhado para outros bancos..rabbitmq teria diversos topicos
+
+
+ Cada microsserviço é responsável por seus próprios dados. Em outras palavras, o serviço ao cliente e o serviço de conta são fracamente acoplados .
+
+ manter as visualizações das consultas dependendo da necessidade do negócio.
+

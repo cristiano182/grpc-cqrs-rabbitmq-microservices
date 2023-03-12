@@ -12,7 +12,11 @@ message Transaction {
    string cpf = 1;
 }
 
+message listTransactionResponse {
+  repeated Transaction transactions = 1;
+}
+
 service BankTransaction  {   
   rpc register(Transaction) returns (google.protobuf.Empty) {}
-  rpc list(listTransactionRequest) returns (Transaction) {}
+  rpc list(listTransactionRequest) returns (listTransactionResponse) {}
 }

@@ -1,6 +1,20 @@
 version: '3.7'
 
 services:
+  rabbitmq:
+    image: 'rabbitmq:3.9.13-management-alpine'
+    container_name: "rabbitmq"
+    restart: always
+    environment:
+      - "RABBITMQ_DEFAULT_PASS=password"
+      - "RABBITMQ_DEFAULT_USER=username"
+      - "RABBITMQ_HOST=rabbitmq"
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    expose:
+       - '15672:15672'
+       - '5672:5672'
   postgres:
     image: postgres
     environment:
@@ -45,6 +59,27 @@ services:
     depends_on:
       - mongo
     command: npm run start
+  grpc-query:
+    container_name: grpc-query
+    restart: always
+    build:
+      context: ./grpc-query
+      dockerfile: Dockerfile
+      target: grpc-query
+    environment:
+      - PORT=50052
+      - HOST=grpc-query
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    expose:
+      - '50052'
+    links:
+      - redis
+    ports:
+      - '50052:50052'
+    depends_on:
+      - redis
+    command: npm run start
   api:
     container_name: api
     restart: always
@@ -53,18 +88,24 @@ services:
       dockerfile: Dockerfile
       target: api
     environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
       - PORT=3000
       - GRPC_COMMAND_HOST=grpc-command
+      - GRPC_QUERY_HOST=grpc-query
+      - RABBITMQ_HOST=rabbitmq
     expose:
       - '3000'
     links:
       - mongo
-      - grpc-command
+      - rabbitmq
+      - redis
     ports:
       - '3000:3000'
     depends_on:
        - mongo
-       - grpc-command
+       - rabbitmq
+       - redis
     command: npm run start
 volumes:
   redis-cache:

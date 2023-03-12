@@ -9,10 +9,10 @@ import { BankTransactionEntity } from "../schemas/bank-transaction-sql";
     password: "postgres",
     database: "postgres",
     synchronize: true,
-    logging: true,
+    logging: false,
     entities: [BankTransactionEntity],
 })
-AppDataSource.initialize()
+ AppDataSource.initialize()
     .then(() => {
         console.log("postgres connected")
     })

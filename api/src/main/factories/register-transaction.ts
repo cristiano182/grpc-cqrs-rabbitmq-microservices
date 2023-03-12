@@ -1,13 +1,13 @@
-import { RegisterBankTransactionGatewayGRPC } from "../../infra/gateway/grpc/bank-transaction"
+import { BankTransactionGatewayGRPC } from "../../infra/gateway/grpc/bank-transaction"
 import { RegisterBankTransactionUsecase } from "../../application/use-cases/register-transaction"
 import { IController } from "../../presentation/interfaces/controller"
-import { BankTransactionController } from "../../presentation/controller/bank-transaction"
+import { RegisterBankTransactionController } from "../../presentation/controller/register-bank-transaction"
 
 
-export class FactoryBankTransaction  {
+export class FactoryRegisterBankTransaction  {
     static make(): IController  {
-        const gateway = new RegisterBankTransactionGatewayGRPC()
+        const gateway = new BankTransactionGatewayGRPC()
         const registerBankTransaction = new RegisterBankTransactionUsecase(gateway)
-        return new BankTransactionController(registerBankTransaction)
+        return new RegisterBankTransactionController(registerBankTransaction)
     }
 }
